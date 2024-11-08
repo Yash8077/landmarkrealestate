@@ -7,7 +7,7 @@ import { Heart, Share2, Star, Building2, Bath, Car, ArrowLeft, ArrowRight, BedDo
 import listing from "../../data/properties.json"
 import ShareButton from './ShareButton'
 
-export default function PropertyDetails({params}:{params:{id:string}}) {
+export default function PropertyDetails() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
