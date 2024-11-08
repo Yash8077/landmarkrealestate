@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Search, MapPin, DollarSign, CreditCard, Shield, Bed } from 'lucide-react'
-import Testimonials from '../../components/testimonials'
+import Testimonials from '../components/testimonials'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
