@@ -3,12 +3,19 @@
 import { Heart, MapPin, Grid as GridIcon, List, LayoutGrid, Menu, X, Home, Building2, Building, Warehouse, TreePine, Hotel, Store, Filter, Search, Bed, Bath, Ruler, Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback,Suspense } from "react"
 import { useSearchParams } from 'next/navigation'
 import * as Slider from '@radix-ui/react-slider'
 import properties from "../data/properties.json"
 
 export default function PropertyListings() {
+  return (
+      <Suspense fallback={<div>Loading...</div>}>
+          <PropertyListingsContent />
+      </Suspense>
+  );
+}
+export function PropertyListingsContent() {
   const searchParams = useSearchParams()
   const [selectedTab, setSelectedTab] = useState(searchParams.get('type') || "Buy")
   const [selectedType, setSelectedType] = useState(searchParams.get('propertyType') || "All")
