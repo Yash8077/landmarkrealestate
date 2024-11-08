@@ -19,7 +19,7 @@ export default function FAQ() {
     {
       id: '2',
       question: 'What types of properties do you deal with?',
-      answer: 'We deal with a wide range of properties including residential homes, apartments, commercial spaces, plots, and agricultural land. Whether you\'re looking for a cozy apartment in the city center or a spacious villa in the outskirts, we\'ve got you covered.'
+      answer: 'We deal with a wide range of properties including residential homes, apartments, commercial spaces, plots, and agricultural land. Whether you&apos;re looking for a cozy apartment in the city center or a spacious villa in the outskirts, we&apos;ve got you covered.'
     },
     {
       id: '3',
@@ -29,12 +29,12 @@ export default function FAQ() {
     {
       id: '4',
       question: 'What documents do I need to buy a property in Dehradun?',
-      answer: 'To buy a property in Dehradun, you typically need ID proof (Aadhar Card, PAN Card), address proof, passport-size photographs, and bank statements. For the property, you\'ll need documents like the Sale Deed, No Objection Certificate (NOC), and property tax receipts. Our team will guide you through the specific requirements for your chosen property.'
+      answer: 'To buy a property in Dehradun, you typically need ID proof (Aadhar Card, PAN Card), address proof, passport-size photographs, and bank statements. For the property, you&apos;ll need documents like the Sale Deed, No Objection Certificate (NOC), and property tax receipts. Our team will guide you through the specific requirements for your chosen property.'
     },
     {
       id: '5',
       question: 'Do you offer property management services?',
-      answer: 'Yes, we offer comprehensive property management services for both residential and commercial properties. This includes tenant screening, rent collection, property maintenance, and handling legal compliances. It\'s ideal for property owners who live outside Dehradun or prefer hassle-free management of their investments.'
+      answer: 'Yes, we offer comprehensive property management services for both residential and commercial properties. This includes tenant screening, rent collection, property maintenance, and handling legal compliances. It&apos;s ideal for property owners who live outside Dehradun or prefer hassle-free management of their investments.'
     },
     {
       id: '6',
@@ -87,10 +87,10 @@ export default function FAQ() {
           
           <div className="p-6 bg-gray-50">
             <p className="text-sm text-gray-600 text-center">
-              Can't find the answer you're looking for? Contact us at{' '}
+              Can&apos;t find the answer you&apos;re looking for? Contact us at{""}
               <a href="mailto:info@landmarkrealestate.com" className="text-blue-600 hover:underline">
                 info@landmarkrealestate.com
-              </a>{' '}
+              </a>{""}
               or call us at +91 135 2555 555
             </p>
           </div>

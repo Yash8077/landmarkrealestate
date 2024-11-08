@@ -40,7 +40,7 @@ export default function TermsOfService() {
       title: 'Use of Service',
       content: (
         <div className="space-y-4">
-          <p>You agree to use our real estate services only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the website and services.</p>
+          <p>You agree to use our real estate services only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else&apos;s use and enjoyment of the website and services.</p>
           <p>Prohibited activities include, but are not limited to:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Providing false or misleading information about properties or transactions</li>

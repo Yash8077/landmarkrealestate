@@ -20,7 +20,7 @@ export default function AboutUs() {
     { 
       icon: <Briefcase className="w-8 h-8 mb-4 text-blue-600" />,
       title: "Client-Centric", 
-      description: "Our clients' needs are at the heart of everything we do." 
+      description: "Our clients&apos; needs are at the heart of everything we do." 
     },
     { 
       icon: <BarChart2 className="w-8 h-8 mb-4 text-blue-600" />,
@@ -90,12 +90,12 @@ export default function AboutUs() {
             >
               <p className="text-lg md:text-xl leading-relaxed">
                 Welcome to our premier real estate agency! With over two decades of experience in the property market,
-                we've established ourselves as a trusted name in helping clients find their dream homes and make smart
+                we&apos;ve established ourselves as a trusted name in helping clients find their dream homes and make smart
                 investments.
               </p>
               <p className="text-lg md:text-xl leading-relaxed">
                 Our team of expert agents combines in-depth local knowledge with cutting-edge market analysis to provide
-                unparalleled service. Whether you're buying, selling, or investing, we're here to guide you through every
+                unparalleled service. Whether you&apos;re buying, selling, or investing, we&apos;re here to guide you through every
                 step of your real estate journey.
               </p>
             </motion.div>
