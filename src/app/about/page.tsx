@@ -90,12 +90,12 @@ export default function AboutUs() {
             >
               <p className="text-lg md:text-xl leading-relaxed">
                 Welcome to our premier real estate agency! With over two decades of experience in the property market,
-                we&apos;ve established ourselves as a trusted name in helping clients find their dream homes and make smart
+                we&rsquo;ve established ourselves as a trusted name in helping clients find their dream homes and make smart
                 investments.
               </p>
               <p className="text-lg md:text-xl leading-relaxed">
                 Our team of expert agents combines in-depth local knowledge with cutting-edge market analysis to provide
-                unparalleled service. Whether you&apos;re buying, selling, or investing, we&apos;re here to guide you through every
+                unparalleled service. Whether you&rsquo;re buying, selling, or investing, we&rsquo;re here to guide you through every
                 step of your real estate journey.
               </p>
             </motion.div>

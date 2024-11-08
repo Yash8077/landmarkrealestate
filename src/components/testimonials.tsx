@@ -43,7 +43,7 @@ export default function Testimonials() {
   return (
     <section className="py-16 bg-gray-50 overflow-hidden px-10">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-2">Don't Trust Us, Trust Their Voice</h2>
+        <h2 className="text-4xl font-bold text-center mb-2">Don&rsquo;t Trust Us, Trust Their Voice</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
           Discover heartfelt accounts of joy and fulfillment as our valued clients embark on 
           the quest for their dream homes and prime investments
@@ -72,7 +72,7 @@ export default function Testimonials() {
                     </div>
                   </div>
                   <p className="text-gray-600">{testimonial.quote}</p>
-                  <div className="absolute bottom-4 right-4 text-gray-300 text-6xl font-serif">"</div>
+                  <div className="absolute bottom-4 right-4 text-gray-300 text-6xl font-serif"></div>
                 </div>
               </div>
             ))}

@@ -87,7 +87,7 @@ export default function FAQ() {
           
           <div className="p-6 bg-gray-50">
             <p className="text-sm text-gray-600 text-center">
-              Can&apos;t find the answer you&apos;re looking for? Contact us at{""}
+              Can&rsquo;t find the answer you&rsquo;re looking for? Contact us at{""}
               <a href="mailto:info@landmarkrealestate.com" className="text-blue-600 hover:underline">
                 info@landmarkrealestate.com
               </a>{""}
