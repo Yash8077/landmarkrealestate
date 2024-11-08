@@ -15,7 +15,7 @@ export default function PropertyListings() {
       </Suspense>
   );
 }
-export function PropertyListingsContent() {
+function PropertyListingsContent() {
   const searchParams = useSearchParams()
   const [selectedTab, setSelectedTab] = useState(searchParams.get('type') || "Buy")
   const [selectedType, setSelectedType] = useState(searchParams.get('propertyType') || "All")
