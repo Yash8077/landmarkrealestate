@@ -1,8 +1,8 @@
-import FAQ from '@/pages/FAQ'
+import ContactUs from '@/pages/Contact'
 import React from 'react'
 
 export default function page() {
   return (
-    <FAQ />
+    <ContactUs />
   )
 }

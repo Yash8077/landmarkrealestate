@@ -17,17 +17,26 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "src/app/listing/page.tsx.bac",
+    "src/app/listing/[id]/page.tsx,bac",
+    "src/app/listing/[id]/page.tsx.bac"
   ],
   "exclude": [
     "node_modules"

@@ -5,12 +5,14 @@ import { Search, MapPin, DollarSign, CreditCard, Shield, Bed } from 'lucide-reac
 import Testimonials from '../components/testimonials'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import FeaturedPropertiesCarousel from '@/components/featuredCarousel'
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-white mx-auto">
-      <main className="pt-16">
+      <main>
         <Hero />
+        <FeaturedPropertiesCarousel />
         <WhyChooseUs />
         <Testimonials />
       </main>
@@ -88,7 +90,7 @@ function SearchForm() {
       bedrooms ? `bedrooms=${bedrooms}` : ''
     ].filter(Boolean).join('&');
     
-    router.push(`/listing?${newUrl}`)
+    router.push(`/properties?${newUrl}`)
   }
 
   return (
@@ -115,9 +117,8 @@ function SearchForm() {
           className="w-full p-2 border rounded focus:ring-2 focus:ring-black"
         >
           <option>Select Property Type</option>
-          <option>Apartment</option>
+          <option>Apartments</option>
           <option>House</option>
-          <option>Villa</option>
           <option>Commercial</option>
         </select>
         <div className="relative">

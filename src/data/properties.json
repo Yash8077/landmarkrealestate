@@ -1,0 +1,220 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "name": "Windlass River Valley",
+      "price": 3028000,
+      "beds": 3,
+      "baths": 4,
+      "area": 233,
+      "lotSize": 500,
+      "yearBuilt": 2020,
+      "type": "Apartments",
+      "images": [
+        "/assets/properties/property1/1_1.jpg",
+        "/assets/properties/property1/1_2.jpg",
+        "/assets/properties/property1/1_3.jpg",
+        "/assets/properties/property1/1_4.jpg"
+      ],
+      "address": {
+        "street": "Kuanwala, Dehradun",
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "country": "India",
+        "zipCode": "284008"
+      },
+      "latitude": 30.2632,
+      "longitude": 78.0588,
+      "listingType": "Buy",
+      "description": "Windlass River Valley offers a stunning blend of modern luxury and natural beauty...",
+      "features": [
+        "Fully Furnished",
+        "1 Car Garage",
+        "Community Swimming Pool",
+        "Garden"
+      ],
+      "rating": 4.5,
+      "reviews": 28
+    },
+    {
+      "id": 2,
+      "name": "Altura Lux",
+      "price": 8000000,
+      "beds": 4,
+      "baths": 2,
+      "area": 150,
+      "lotSize": 300,
+      "yearBuilt": 2023,
+      "type": "Apartments",
+      "images": [
+        "/assets/properties/property2/2_1.jpg",
+        "/assets/properties/property2/2_2.jpg",
+        "/assets/properties/property2/2_3.jpg",
+        "/assets/properties/property2/2_4.jpg"
+      ],
+      "address": {
+        "street": "General Mahadev Singh Road, Dehradun",
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "country": "India",
+        "zipCode": "248006"
+      },
+      "latitude": 30.3398,
+      "longitude": 78.0422,
+      "listingType": "Buy",
+      "description": "Altura Lux Apartments redefine urban living...",
+      "features": [
+        "All Furniture",
+        "Shared Car Parking",
+        "Gym",
+        "Community Hall"
+      ],
+      "rating": 4.2,
+      "reviews": 15
+    },
+    {
+      "id": 4,
+      "name": "Prem Nagar Commercial Building",
+      "price": 6000000,
+      "beds": 5,
+      "baths": 4,
+      "area": 125,
+      "lotSize": 200,
+      "yearBuilt": 2023,
+      "type": "Commercial",
+      "images": [
+        "/assets/properties/property4/4_1.jpg",
+        "/assets/properties/property4/4_2.avif",
+        "/assets/properties/property4/4_3.avif",
+        "/assets/properties/property4/4_4.avif"
+      ],
+      "address": {
+        "street": "Prem Nagar",
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "country": "India",
+        "zipCode": "248001"
+      },
+      "latitude": 30.2717,
+      "longitude": 77.9798,
+      "listingType": "Buy",
+      "description": "Located on the ground floor, accessibility is not a problem...",
+      "features": [
+        "Semi Furnished",
+        "Fresh Construction",
+        "Attached Market",
+        "Ceramic Flooring"
+      ],
+      "rating": 4.0,
+      "reviews": 10
+    },
+    {
+      "id": 3,
+      "name": "Gurjara Society",
+      "price": 4000000,
+      "beds": 2,
+      "baths": 4,
+      "area": 125,
+      "lotSize": 200,
+      "yearBuilt": 2023,
+      "type": "House",
+      "images": [
+        "/assets/properties/property3/3_1.jpg",
+        "/assets/properties/property3/3_2.jpg",
+        "/assets/properties/property3/3_3.jpg",
+        "/assets/properties/property3/3_4.jpg"
+      ],
+      "address": {
+        "street": "Gujrara Mansingh Road",
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "country": "India",
+        "zipCode": "248001"
+      },
+      "latitude": 30.3305,
+      "longitude": 78.0448,
+      "listingType": "Buy",
+      "description": "This society offers the perfect balance between privacy and community living...",
+      "features": [
+        "Private Garden",
+        "Fresh Construction",
+        "Gated Society",
+        "Ceramic Flooring"
+      ],
+      "rating": 4.0,
+      "reviews": 10
+    },
+    {
+      "id": 5,
+      "name": "2 BHK Independent House for Rent",
+      "price": 25000,
+      "beds": 2,
+      "baths": 2,
+      "area": 150,
+      "lotSize": 600,
+      "yearBuilt": 2022,
+      "type": "House",
+      "images": [
+        "/assets/properties/property5/5_1.avif",
+        "/assets/properties/property5/5_2.avif",
+        "/assets/properties/property5/5_3.avif",
+        "/assets/properties/property5/5_4.avif"
+      ],
+      "address": {
+        "street": "Dalanwala",
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "country": "India",
+        "zipCode": "248001"
+      },
+      "latitude": 30.3197,
+      "longitude": 78.0401,
+      "listingType": "Rent",
+      "description": "Family Home is a spacious and well-designed residence...",
+      "features": [
+        "Semi Furnished",
+        "2 Car Garage",
+        "Home Office",
+        "Children's Play Area"
+      ],
+      "rating": 4.8,
+      "reviews": 35
+    },
+    {
+      "id": 6,
+      "name": "Spacious Residence",
+      "price": 60000,
+      "beds": 5,
+      "baths": 3,
+      "area": 260,
+      "lotSize": 700,
+      "yearBuilt": 2021,
+      "type": "House",
+      "images": [
+        "/assets/landing1.jpg",
+        "/assets/landing1.jpg",
+        "/assets/landing1.jpg",
+        "/assets/landing1.jpg"
+      ],
+      "address": {
+        "street": "222 Spacious Way",
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "country": "India",
+        "zipCode": "67890"
+      },
+      "latitude": 30.3142,
+      "longitude": 78.0558,
+      "listingType": "Rent",
+      "description": "Spacious Residence is the epitome of luxury living...",
+      "features": [
+        "All Furniture",
+        "3 Car Garage",
+        "Home Theater",
+        "Infinity Pool"
+      ],
+      "rating": 4.9,
+      "reviews": 18
+    }
+  ]
+}

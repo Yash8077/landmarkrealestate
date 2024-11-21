@@ -1,8 +1,8 @@
-import FAQ from '@/pages/FAQ'
+import WishlistPage from '@/pages/Wishlist'
 import React from 'react'
 
 export default function page() {
   return (
-    <FAQ />
+   <WishlistPage />
   )
 }

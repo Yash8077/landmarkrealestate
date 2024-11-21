@@ -1,75 +1,91 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useParams } from 'next/navigation'
 import Image from 'next/image'
-import { Heart, Share2, Star, Building2, Bath, Car, ArrowLeft, ArrowRight, BedDouble, Ruler, Home, CalendarDays, Trees, Phone, Mail, MessageSquare, User } from 'lucide-react'
-import listing from "../../data/properties.json"
-import ShareButton from './ShareButton'
-
-export default function PropertyDetails() {
-  const { id } = useParams();
-  const [property, setProperty] = useState(null);
+import { Heart, Star, Building2, Bath, Car, ArrowLeft, ArrowRight, BedDouble, Ruler, Home, CalendarDays, Trees, Phone, Mail, MessageSquare, User } from 'lucide-react'
+import listing from "@/data/properties.json"
+import ShareButton from '@/components/ShareButton'
+import { useWishlist } from '@/context/store'
+import { Button } from "@/components/ui/button"
+import { Property } from "@/lib/property"
+export default function PropertyDetails({ params }: { params: { id: string } }) {
+//   const id=params.id;
+  const [property, setProperty] = useState<Property | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<String | null>(null);
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
   useEffect(() => {
+    const id=params.id||'0';
     const foundProperty = listing.properties.find(p => p.id.toString() === id) ?? null;
     if (foundProperty === null) {
       setProperty(null);
       setError("Property not found");
-      setLoading(false);  // Stop loading if property is not found
+      setLoading(false);
     } else {
       setProperty(foundProperty);
       setError(null);
-      setLoading(false); // Loading finished if property is found
+      setLoading(false);
     }
-  }, [id, listing.properties]);
+  }, [params.id, listing.properties]);
 
   const nextImage = useCallback(() => {
-    if (!property || !property.images) return; // Avoid errors if property or images are not available
+    if (!property || !property.images) return;
 
     setIsAnimating(true);
     setCurrentImageIndex((prevIndex) =>
       prevIndex === property.images.length - 1 ? 0 : prevIndex + 1
     );
-    setTimeout(() => setIsAnimating(false), 500); // Match this with the CSS transition duration
+    setTimeout(() => setIsAnimating(false), 500);
   }, [property]);
 
   const prevImage = useCallback(() => {
-    if (!property || !property.images) return; // Avoid errors if property or images are not available
+    if (!property || !property.images) return;
 
     setIsAnimating(true);
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? property.images.length - 1 : prevIndex - 1
     );
-    setTimeout(() => setIsAnimating(false), 500); // Match this with the CSS transition duration
+    setTimeout(() => setIsAnimating(false), 500);
   }, [property]);
 
   useEffect(() => {
-    if (!property || !property.images) return; // Only set interval if property is valid
+    if (!property || !property.images) return;
 
     const intervalId = setInterval(() => {
       nextImage();
     }, 5000);
 
-    return () => clearInterval(intervalId); // Cleanup on component unmount
+    return () => clearInterval(intervalId);
   }, [nextImage, property]);
+
+  const handleWishlistToggle = useCallback(() => {
+    if (!property) return;
+
+    if (isInWishlist(property.id)) {
+      removeFromWishlist(property.id);
+    } else {
+      addToWishlist(property.id);
+    }
+  }, [property, isInWishlist, addToWishlist, removeFromWishlist]);
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
-
+  if(!property){
+    return <div className="min-h-screen p-8 text-center">Property Not Found</div>
+  }
   if (error) {
     return <div className="flex justify-center items-center h-screen">{error}</div>;
   }
+
   return (
-    <div className="min-h-screen bg-gray-50 mt-12">
+    <div className="min-h-screen bg-gray-50">
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8">
-          {/* Main Image Section */}
+
           <div className="relative">
             <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden">
               {property.images.map((img, index) => (
@@ -98,9 +114,17 @@ export default function PropertyDetails() {
               >
                 <ArrowRight className="h-6 w-6" />
               </button>
-              <div className="absolute top-4 left-4 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors cursor-pointer z-10">
-                <Heart className="h-5 w-5" />
-              </div>
+              <Button
+                variant="outline"
+                size="icon"
+                className={`absolute top-4 left-4 rounded-full bg-white/80 hover:bg-white ${
+                  isInWishlist(property.id) ? 'text-red-500' : 'text-gray-900'
+                }`}
+                onClick={handleWishlistToggle}
+                aria-label={isInWishlist(property.id) ? "Remove from wishlist" : "Add to wishlist"}
+              >
+                <Heart className="h-5 w-5" fill={isInWishlist(property.id) ? "currentColor" : "none"} />
+              </Button>
               <div>
                 <ShareButton url={window.location.href} title={`Check out ${property.name}`} />
               </div>
@@ -173,8 +197,8 @@ export default function PropertyDetails() {
                   <div className="flex items-center space-x-3">
                     <Car className="h-8 w-8 text-blue-500" />
                     <div>
-                      <p className="text-sm text-gray-500">Garage</p>
-                      <p className="font-medium">{property.garage} Car</p>
+                      <p className="text-sm text-gray-500">Lot Size</p>
+                      <p className="font-medium">{property.lotSize}</p>
                     </div>
                   </div>
                 </div>
@@ -182,7 +206,7 @@ export default function PropertyDetails() {
 
               <div className="space-y-4">
                 <h2 className="text-2xl font-semibold">Description</h2>
-                <p className="text-gray-600 leading-relaxed">{property.description}</p>
+                <p className="text-gray-600">{property.description}</p>
               </div>
 
               <div className="space-y-4">
@@ -241,7 +265,7 @@ export default function PropertyDetails() {
                     <Star className="h-6 w-6 text-blue-500" />
                     <div>
                       <p className="text-sm text-gray-500">Price</p>
-                      <p className="font-medium text-2xl text-blue-600">${property.price.toLocaleString()}</p>
+                      <p className="font-medium text-2xl text-blue-600">₹{property.price.toLocaleString('en-IN')}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -281,7 +305,7 @@ export default function PropertyDetails() {
               <div className="bg-white rounded-lg p-6 sticky top-32 shadow-md">
                 <div className="space-y-6">
                   <h2 className="text-2xl font-semibold text-center">Interested in this property?</h2>
-                  <form className="space-y-4">
+                  <form className="space-y-4" action="https://formsubmit.co/ymishra502@gmail.com" method="POST">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                       <div className="relative">
@@ -290,6 +314,7 @@ export default function PropertyDetails() {
                         </span>
                         <input
                           id="name"
+                          name="name"
                           type="text"
                           placeholder="Enter your name"
                           className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -300,8 +325,6 @@ export default function PropertyDetails() {
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                       <div className="flex">
                         <select className="px-3 py-2 border rounded-l-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                          <option>+1</option>
-                          <option>+44</option>
                           <option>+91</option>
                         </select>
                         <div className="relative flex-grow">
@@ -309,10 +332,10 @@ export default function PropertyDetails() {
                             <Phone className="h-5 w-5 text-gray-400" />
                           </span>
                           <input
-                            
                             id="phone"
                             type="tel"
                             placeholder="Enter your phone number"
+                            name="phone"
                             className="w-full pl-10 pr-4 py-2 border rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />
                         </div>
@@ -327,6 +350,7 @@ export default function PropertyDetails() {
                         <input
                           id="email"
                           type="email"
+                          name="email"
                           placeholder="Enter your email"
                           className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
@@ -340,6 +364,7 @@ export default function PropertyDetails() {
                         </span>
                         <textarea
                           id="message"
+                          name="message"
                           rows={4}
                           placeholder={`I'm interested in ${property.name}`}
                           className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
