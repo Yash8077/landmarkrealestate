@@ -44,7 +44,6 @@ export default function Properties() {
     parseInt(searchParams?.get('maxPrice') || '15000000')
   ])
   const [searchQuery, setSearchQuery] = useState(searchParams?.get('query') || '')
-  const [floorArea, setFloorArea] = useState({ min: 20, max: 710 })
   const [yearBuilt, setYearBuilt] = useState([1980, 2023])
   const [bedrooms, setBedrooms] = useState([1, 10])
   const [bathrooms, setBathrooms] = useState([1, 10])
@@ -60,7 +59,6 @@ export default function Properties() {
       (selectedTab === 'Buy' ? property.listingType === 'Buy' : property.listingType === 'Rent') &&
       (selectedType === 'All' || property.type === selectedType) &&
       property.price >= priceRange[0] && property.price <= priceRange[1] &&
-      property.area >= floorArea.min && property.area <= floorArea.max &&
       property.yearBuilt >= yearBuilt[0] && property.yearBuilt <= yearBuilt[1] &&
       property.beds >= bedrooms[0] && property.beds <= bedrooms[1] &&
       property.baths >= bathrooms[0] && property.baths <= bathrooms[1] &&
@@ -87,7 +85,7 @@ export default function Properties() {
     }
 
     setFilteredProperties(filtered)
-  }, [selectedTab, selectedType, priceRange, floorArea, yearBuilt, bedrooms, bathrooms, searchQuery, sortBy])
+  }, [selectedTab, selectedType, priceRange, yearBuilt, bedrooms, bathrooms, searchQuery, sortBy])
 
   useEffect(() => {
     filterAndSortProperties()
@@ -109,9 +107,6 @@ export default function Properties() {
     setPriceRange(value)
   }
 
-  const handleFloorAreaChange = (key, value) => {
-    setFloorArea(prev => ({ ...prev, [key]: parseInt(value) }))
-  }
 
   const handleYearBuiltChange = (value: number[]) => {
     setYearBuilt(value)

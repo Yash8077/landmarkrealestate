@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     google: 'google',
   },
   assets: ['https://nextjs.org/assets'],  // url for all assets
-  category: 'technology',
+  category: 'ecommerce',
 }
 
 export default function page() {

@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useCallback, memo } from 'react'
+import { useCallback, memo } from 'react'
 import dynamic from 'next/dynamic'
+import { useForm } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -9,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Home, Users, Clock } from 'lucide-react'
 
 // Lazy load the Google Maps iframe
-const GoogleMap = dynamic(() => import('../components/GoogleMap'), { ssr: false })
+const GoogleMap = dynamic(() => import('@/components/GoogleMap'), { ssr: false })
 
 // Memoize the ContactInfo component
 const ContactInfo = memo(() => (
@@ -43,26 +44,11 @@ const ContactInfo = memo(() => (
 ContactInfo.displayName = 'ContactInfo'
 
 export default function ContactUs() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
+  const { register, formState: { errors } } = useForm()
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({ ...prevState, [name]: value }))
-  }, [])
-
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    setFormData({ name: '', email: '', message: '' })
-    alert('Thank you for your message. We will get back to you soon!')
-  }, [formData])
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed" style={{backgroundImage: 'url("/assets/contact.jpg?height=1080&width=1920")'}}>
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: 'url("/assets/contact.jpg?height=1080&width=1920")' }}>
       <div className="min-h-screen bg-black bg-opacity-50">
         <header className="pt-16 pb-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,34 +65,38 @@ export default function ContactUs() {
                   </CardHeader>
                   <CardContent>
                     <form action="https://formsubmit.co/ymishra502@gmail.com" method="POST" className="space-y-4">
-                      {[
-                        { id: 'name', label: 'Name', type: 'text' },
-                        { id: 'email', label: 'Email', type: 'email' },
-                      ].map(({ id, label, type }) => (
-                        <div key={id}>
-                          <label htmlFor={id} className="block text-sm font-medium text-white">{label}</label>
-                          <Input
-                            type={type}
-                            id={id}
-                            name={id}
-                            value={formData[id as keyof typeof formData]}
-                            onChange={handleChange}
-                            required
-                            className="mt-1 bg-white bg-opacity-20 text-white placeholder-gray-300"
-                          />
-                        </div>
-                      ))}
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
+                        <Input
+                          type="text"
+                          id="name"
+                          {...register('name', { required: 'Name is required', minLength: { value: 3, message: 'Name must be at least 3 characters' } })}
+                          className="mt-1 bg-white bg-opacity-20 text-white placeholder-gray-300"
+                        />
+                        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message?.toString()}</p>}
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
+                        <Input
+                          type="email"
+                          id="email"
+                          {...register('email', {
+                            required: 'Email is required',
+                            pattern: { value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/, message: 'Enter a valid email address' }
+                          })}
+                          className="mt-1 bg-white bg-opacity-20 text-white placeholder-gray-300"
+                        />
+                        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message?.toString()}</p>}
+                      </div>
                       <div>
                         <label htmlFor="message" className="block text-sm font-medium text-white">Message</label>
                         <Textarea
                           id="message"
-                          name="message"
                           rows={4}
-                          value={formData.message}
-                          onChange={handleChange}
-                          required
+                          {...register('message', { required: 'Message is required', minLength: { value: 10, message: 'Message must be at least 10 characters' } })}
                           className="mt-1 bg-white bg-opacity-20 text-white placeholder-gray-300"
                         />
+                        {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message?.toString()}</p>}
                       </div>
                       <Button type="submit" className="w-full bg-white text-black hover:bg-opacity-100">Send Message</Button>
                     </form>
@@ -131,4 +121,3 @@ export default function ContactUs() {
     </div>
   )
 }
-
