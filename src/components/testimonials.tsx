@@ -5,25 +5,25 @@ import { Star } from 'lucide-react'
 const testimonials = [
   {
     name: "Rachel Hadid",
-    image: "/placeholder.svg?height=80&width=80",
+    image: `https://i.pravatar.cc/150?img=${1}`,
     quote: "Choosing this real estate service was the best decision I ever made. Their team demonstrated exceptional professionalism and expertise. I highly recommend their services to anyone!",
     rating: 5
   },
   {
     name: "Louis Padrige",
-    image: "/placeholder.svg?height=80&width=80",
+    image: `https://i.pravatar.cc/150?img=${2}`,
     quote: "Their expert negotiation skills helped me sell my property at a great price in no time. I would definitely work with them again.",
     rating: 5
   },
   {
     name: "Anastasia Baldwin",
-    image: "/placeholder.svg?height=80&width=80",
+    image:  `https://i.pravatar.cc/150?img=${3}`,
     quote: "They patiently answered all our questions, provided valuable insights, and helped us secure our dream home within our budget.",
     rating: 5
   },
   {
     name: "Harry Jenda",
-    image: "/placeholder.svg?height=80&width=80",
+    image:  `https://i.pravatar.cc/150?img=${4}`,
     quote: "They presented us with a stunning selection of homes that perfectly matched our preferences. The team's attention to detail and in-depth knowledge of the local market truly impressed us!",
     rating: 5
   }
