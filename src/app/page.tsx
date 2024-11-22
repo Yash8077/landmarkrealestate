@@ -43,20 +43,7 @@ function Hero() {
 
         <SearchForm />
 
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <span className="bg-white text-black px-3 py-1 rounded-full text-sm">
-            Residential
-          </span>
-          <span className="bg-white text-black px-3 py-1 rounded-full text-sm">
-            Commercial
-          </span>
-          <span className="bg-white text-black px-3 py-1 rounded-full text-sm">
-            Hill View
-          </span>
-          <span className="bg-white text-black px-3 py-1 rounded-full text-sm">
-            Luxury
-          </span>
-        </div>
+        
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">About Us</h3>
             <p className="text-gray-400">
-              DehradunEstate is your trusted partner in finding the perfect property in Dehradun and surrounding areas.
+              Landmark Real Estate is your trusted partner in finding the perfect property in Dehradun and surrounding areas.
             </p>
           </div>
           <div>
