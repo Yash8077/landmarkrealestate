@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Star } from 'lucide-react'
-
+import Image from 'next/image'
 const testimonials = [
   {
     name: "Rachel Hadid",
@@ -57,10 +57,12 @@ export default function Testimonials() {
               <div key={index} className="w-full md:w-1/2 flex-shrink-0 px-4">
                 <div className="bg-white p-6 rounded-lg shadow-md relative h-full">
                   <div className="flex items-center mb-4">
-                    <img 
+                    <Image
                       src={testimonial.image} 
                       alt={testimonial.name} 
                       className="w-16 h-16 rounded-full mr-4"
+                      width={100}
+                      height={100}
                     />
                     <div>
                       <h3 className="font-semibold">{testimonial.name}</h3>

@@ -1,5 +1,5 @@
 'use client'
-
+import PropertyStore from '@/context/PropertyStore';
 import { useState, useEffect, useCallback, Suspense } from "react"
 import { useSearchParams } from 'next/navigation'
 import Image from "next/image"
@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import properties from "@/data/properties.json"
 import { useWishlist } from '@/context/store'
 import { Property } from "@/lib/property"
 function MapComponent() {
@@ -44,18 +43,33 @@ export default function Properties() {
     parseInt(searchParams?.get('maxPrice') || '15000000')
   ])
   const [searchQuery, setSearchQuery] = useState(searchParams?.get('query') || '')
-  const [yearBuilt, setYearBuilt] = useState([1980, 2023])
+  const [yearBuilt, setYearBuilt] = useState([1980, 2025])
   const [bedrooms, setBedrooms] = useState([1, 10])
   const [bathrooms, setBathrooms] = useState([1, 10])
   const [viewType, setViewType] = useState("list")
   const [sortBy, setSortBy] = useState("newest")
-  const [filteredProperties, setFilteredProperties] = useState<Property[]>([])
+  // const [properties, setProperties] = useState<Property[]>([]);
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
+  const { properties, fetchProperties,fetched,setProperties } = PropertyStore();
+
+  // const fetchProperties = useCallback(async () => {
+  //   try {
+  //     const response = await fetch('/api/listing');
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch properties');
+  //     }
+  //     const data = await response.json();
+  //     setProperties(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, []);
 
   const filterAndSortProperties = useCallback(() => {
-    let filtered = properties.properties.filter(property => 
+    let filtered = properties.filter(property => 
       (selectedTab === 'Buy' ? property.listingType === 'Buy' : property.listingType === 'Rent') &&
       (selectedType === 'All' || property.type === selectedType) &&
       property.price >= priceRange[0] && property.price <= priceRange[1] &&
@@ -85,11 +99,23 @@ export default function Properties() {
     }
 
     setFilteredProperties(filtered)
-  }, [selectedTab, selectedType, priceRange, yearBuilt, bedrooms, bathrooms, searchQuery, sortBy])
+  }, [properties,selectedTab, selectedType, priceRange, yearBuilt, bedrooms, bathrooms, searchQuery, sortBy])
 
   useEffect(() => {
-    filterAndSortProperties()
-  }, [filterAndSortProperties])
+    const loadProperties=async()=>{
+      if(properties.length===0){
+        const data:Property[]|undefined = await fetchProperties();
+        setProperties(data);
+        console.log(properties);
+      }
+
+    }
+      loadProperties();
+  }, [properties,fetchProperties,setProperties]);
+
+  useEffect(() => {
+    filterAndSortProperties();
+  }, [filterAndSortProperties]);
 
   useEffect(() => {
     setSelectedTab(searchParams?.get('type') || "Buy")
@@ -348,7 +374,7 @@ export default function Properties() {
               ${viewType === 'box' ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3' : ''}
             `}>
               {filteredProperties.map((property) => (
-                <Link href={`/properties/${property.id}`} key={property.id} className={`
+                <Link href={`/properties/${property._id}`} key={property._id} className={`
                   ${viewType === 'list' ? 'flex space-x-4' : ''}
                   ${viewType === 'grid' ? 'group relative' : ''}
                   ${viewType === 'box' ? 'group relative' : ''}
@@ -370,19 +396,19 @@ export default function Properties() {
                       variant="outline"
                       size="icon"
                       className={`absolute right-2 top-2 rounded-full bg-white/80 hover:bg-white ${
-                        isInWishlist(property.id) ? 'text-red-500' : 'text-gray-900'
+                        isInWishlist(property._id) ? 'text-red-500' : 'text-gray-900'
                       }`}
                       onClick={(e) => {
                         e.preventDefault()
-                        if (isInWishlist(property.id)) {
-                          removeFromWishlist(property.id)
+                        if (isInWishlist(property._id)) {
+                          removeFromWishlist(property._id)
                         } else {
-                          addToWishlist(property.id)
+                          addToWishlist(property._id)
                         }
                       }}
-                      aria-label={isInWishlist(property.id) ? "Remove from favorites" : "Add to favorites"}
+                      aria-label={isInWishlist(property._id) ? "Remove from favorites" : "Add to favorites"}
                     >
-                      <Heart className="h-5 w-5" fill={isInWishlist(property.id) ? "currentColor" : "none"} />
+                      <Heart className="h-5 w-5" fill={isInWishlist(property._id) ? "currentColor" : "none"} />
                     </Button>
                   </div>
                   <div className={`

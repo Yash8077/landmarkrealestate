@@ -6,33 +6,46 @@ import { Heart, Star, Building2, Bath, Car, ArrowLeft, ArrowRight, BedDouble, Ru
 import ShareButton from '@/components/ShareButton'
 import { useWishlist } from '@/context/store'
 import { Button } from "@/components/ui/button"
-import { Property } from "@/lib/property"
-import PropertyStore from '@/context/PropertyStore';
+import { Property } from "@/interface/property"
+
 export default function PropertyDetails({ params }: { params: { id: string } }) {
 //   const id=params.id;
-    const [property, setProperty] = useState<Property | undefined>(undefined);
+  const [property, setProperty] = useState<Property | null>(null);
+  const [listing, setListing] = useState<Property[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [, setIsAnimating] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [error, setError] = useState<String | null>(null);
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
-  const getPropertyById = PropertyStore((state) => state.getPropertyById);
+  const fetchListing = useCallback(async () => {
+    try {
+      const response = await fetch('/api/listing');
+      if (!response.ok) {
+        throw new Error('Failed to fetch properties');
+      }
+      const data = await response.json();
+      setListing(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+  useEffect(() => {
+    fetchListing();
+  }, [fetchListing]);
 
   useEffect(() => {
     const id=params.id||'0';
-    console.log("use Effect",id);
-    const foundProperty = getPropertyById(id)
-    console.log("After Effect",foundProperty);
+    const foundProperty = listing.find(p => p._id === id) ?? null;
     if (foundProperty === null) {
-        setProperty(undefined);
+      setProperty(null);
       setError("Property not found");
       setLoading(false);
     } else {
-        setProperty(foundProperty);
+      setProperty(foundProperty);
       setError(null);
       setLoading(false);
     }
-  }, [params.id,getPropertyById]);
+  }, [params.id, listing]);
 
   const nextImage = useCallback(() => {
     if (!property || !property.images) return;

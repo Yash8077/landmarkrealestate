@@ -7,7 +7,7 @@ type Props = {
   params: { id: string };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-
+  
   const id = (await params).id;
 
   const property = propertyData.properties.find((p) => p.id === Number(id));
