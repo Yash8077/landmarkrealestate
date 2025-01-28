@@ -1,5 +1,4 @@
-'use client'
-
+// src/components/FeaturedPropertiesCarousel.tsx
 import * as React from "react"
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,21 +13,29 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
-
-// Import the properties data
-import propertiesData from '@/data/properties.json'
-
-// Select specific properties to be featured
-const featuredPropertyIds = [1, 2, 3, 4]; // Adjust these IDs based on your actual data
+import { Property } from "@/lib/property"  
+const fetchFeaturedProperties = async (): Promise<Property[]> => {
+  const response = await fetch('/api/featured');
+  if (!response.ok) {
+    throw new Error('Failed to fetch properties');
+  }
+  return response.json();
+};
 
 export default function FeaturedPropertiesCarousel() {
-  const isMobile = useMediaQuery({ maxWidth: 768 })
+  const [featuredProperties, setFeaturedProperties] = React.useState<Property[]>([]);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
-  // Filter the properties to only include the featured ones
-  const featuredProperties = React.useMemo(() => 
-    propertiesData.properties.filter(property => featuredPropertyIds.includes(property.id)),
-    [propertiesData.properties]
-  )
+  // Fetch the properties when the component mounts
+  React.useEffect(() => {
+    fetchFeaturedProperties()
+      .then(data => {
+        setFeaturedProperties(data);
+      })
+      .catch(error => {
+        console.error('Error fetching properties:', error);
+      });
+  }, []);
 
   // Function to handle errors and provide fallback content
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -50,7 +57,7 @@ export default function FeaturedPropertiesCarousel() {
         >
           <CarouselContent>
             {featuredProperties.map((property) => (
-              <CarouselItem key={property.id} className="h-full">
+              <CarouselItem key={property._id} className="h-full">
                 <Card className="h-full flex flex-col">
                   <CardHeader>
                     <CardTitle className="text-gray-900 dark:text-gray-100">{property.name}</CardTitle>
@@ -72,7 +79,7 @@ export default function FeaturedPropertiesCarousel() {
                   </CardContent>
                   <CardFooter>
                     <Button asChild className="w-full">
-                      <Link href={`/properties/${property.id}`}>View Details</Link>
+                      <Link href={`/properties/${property._id}`}>View Details</Link>
                     </Button>
                   </CardFooter>
                 </Card>

@@ -37,7 +37,7 @@
     "src/app/listing/page.tsx.bac",
     "src/app/listing/[id]/page.tsx,bac",
     "src/app/listing/[id]/page.tsx.bac"
-  ],
+, "src/pages/PropertyDetails.tsx.bac", "src/pages/Properties.tsx.bac", "src/lib/mongodb.js"  ],
   "exclude": [
     "node_modules"
   ]
