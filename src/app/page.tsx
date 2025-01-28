@@ -5,14 +5,14 @@ import { Search, MapPin, DollarSign, CreditCard, Shield, Bed } from 'lucide-reac
 import Testimonials from '../components/testimonials'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import FeaturedPropertiesCarousel from '@/components/featuredCarousel'
+// import FeaturedPropertiesCarousel from '@/components/featuredCarousel'
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-white mx-auto">
       <main>
         <Hero />
-        <FeaturedPropertiesCarousel />
+        {/* <FeaturedPropertiesCarousel /> */}
         <WhyChooseUs />
         <Testimonials />
       </main>
