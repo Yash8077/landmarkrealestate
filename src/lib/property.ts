@@ -50,7 +50,7 @@ interface Address {
  export interface PropertyState {
     properties: Property[];
     fetched: boolean; // The array of properties
-    fetchProperties: () => Promise<Property[]|undefined>; // Function to fetch properties
-    setProperties: (data: Property[]|undefined) => void;
-    getPropertyById: (id: string) => Property | undefined; // Function to get a property by its ID
+    fetchProperties: () => Promise<Property[]>; // Function to fetch properties
+    setProperties: (data: Property[]) => void;
+    getPropertyById: (id: string) => Property; // Function to get a property by its ID
   }

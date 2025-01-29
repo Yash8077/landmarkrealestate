@@ -12,7 +12,7 @@ export default function Page() {
     <div className="min-h-screen bg-white mx-auto">
       <main>
         <Hero />
-        <FeaturedPropertiesCarousel />
+        {/* <FeaturedPropertiesCarousel /> */}
         <WhyChooseUs />
         <Testimonials />
       </main>

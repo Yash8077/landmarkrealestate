@@ -53,7 +53,7 @@ export default function Properties() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist()
-  const { properties, fetchProperties,fetched,setProperties } = PropertyStore();
+  const { properties,setProperties } = PropertyStore();
 
   // const fetchProperties = useCallback(async () => {
   //   try {
@@ -101,18 +101,32 @@ export default function Properties() {
     setFilteredProperties(filtered)
   }, [properties,selectedTab, selectedType, priceRange, yearBuilt, bedrooms, bathrooms, searchQuery, sortBy])
 
-  useEffect(() => {
-    const loadProperties=async()=>{
-      if(properties.length===0){
-        const data:Property[]|undefined = await fetchProperties();
-        setProperties(data);
-        console.log(properties);
+  // useEffect(() => {
+  //   const loadProperties=async()=>{
+  //     if(properties.length===0){
+  //       const data:Property[] = await fetchProperties();
+  //       setProperties(data);
+  //       console.log(properties);
+  //     }
+
+  //   }
+  //     loadProperties();
+  // }, [fetchProperties,setProperties]);
+    const fetchProperties = useCallback(async () => {
+    try {
+      const response = await fetch('/api/listing');
+      if (!response.ok) {
+        throw new Error('Failed to fetch properties');
       }
-
+      const data = await response.json();
+      setProperties(data);
+    } catch (error) {
+      console.error(error);
     }
-      loadProperties();
-  }, [properties,fetchProperties,setProperties]);
-
+  }, []);
+  useEffect(() => {
+    fetchProperties()
+  }, []);
   useEffect(() => {
     filterAndSortProperties();
   }, [filterAndSortProperties]);

@@ -10,7 +10,7 @@ import { Property } from "@/lib/property"
 import PropertyStore from '@/context/PropertyStore';
 export default function PropertyDetails({ params }: { params: { id: string } }) {
 //   const id=params.id;
-    const [property, setProperty] = useState<Property | undefined>(undefined);
+    const [property, setProperty] = useState<Property>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [, setIsAnimating] = useState(false);

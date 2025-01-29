@@ -1,4 +1,4 @@
-import PropertyForm  from '@/pages/SellProperty'
+import PropertyForm  from '@/pageComponents/SellProperty'
 import { Building2, Users, BadgeCheck, Trophy } from 'lucide-react'
 
 const stats = [

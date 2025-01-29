@@ -1,4 +1,4 @@
-import ContactUs from '@/pages/Contact'
+import ContactUs from '@/pageComponents/Contact'
 import React from 'react'
 
 export default function page() {

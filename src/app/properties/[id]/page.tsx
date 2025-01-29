@@ -1,4 +1,4 @@
-import PropertyDetails from "@/pages/PropertyDetails";
+import PropertyDetails from "@/pageComponents/PropertyDetails";
 import { Loader2 } from "lucide-react";
 import React, { Suspense } from "react";
 import type { Metadata } from "next";

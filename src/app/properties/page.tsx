@@ -2,7 +2,7 @@ import React from 'react'
 import { Suspense } from 'react'
 import { Loader2 } from 'lucide-react'
 import type { Metadata } from 'next'
-import Properties from '@/pages/Properties'
+import Properties from '@/pageComponents/Properties'
 export const metadata: Metadata = {
   title: 'Products',
   description:       "Explore our wide range of properties. Find your perfect house.",

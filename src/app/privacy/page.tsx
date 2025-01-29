@@ -1,4 +1,4 @@
-import PrivacyPolicy from '@/pages/Privacy'
+import PrivacyPolicy from '@/pageComponents/Privacy'
 import React from 'react'
 
 export default function page() {

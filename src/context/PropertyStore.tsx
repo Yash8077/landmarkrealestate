@@ -12,21 +12,26 @@ const PropertyStore = create<PropertyState>((set, get) => ({
           throw new Error('Failed to fetch properties');
         }
         const data: Property[] = await response.json(); 
+        set({ properties: data, fetched: true }); // Update the state with fetched data and set fetched to true
         return data;
-        // set({ properties: data, fetched: true }); // Update the state with fetched data and set fetched to true
       } catch (error) {
         console.error(error);
+        return [];
       }
     }  
     else{
-      return;
+      return [];
     }
   },
-setProperties: (data: Property[]|undefined) => {
+setProperties: (data: Property[]) => {
     set({properties:data});
   },
   getPropertyById: (id: string) => {
-    return get().properties.find((property) => property._id === id);
+    const property = get().properties.find((property) => property._id === id);
+    if (!property) {
+      throw new Error(`Property with id ${id} not found`);
+    }
+    return property;
   },
 }));
 
